@@ -1,101 +1,91 @@
-const Room = require("../models/roomModels");
+const Room = require("../models/roomModel")
 
-exports.getAllRooms = async (req, res, next) => {
+exports.GetAllRooms = async (req, res, next) => {
   try {
-    const rooms = await Room.find();
+    const rooms = await Room.find()
 
     res.status(200).json({
-      status: 'success',
-      results: rooms.length,
+      status: "sucess",
       data: {
         rooms
       }
     })
-  } catch (e) {
-    res.status(400).json(
-      {
-        status: `failed to get rooms. ${rooms}`
-      }
-    )
-  } 
+  }
+  catch (e) {
+    res.status(400).json({
+      stats: "failed to get rooms",
+    });
+  }
 }
 
-exports.getOneRoom = async (req, res, next) => {
+exports.GetOneRooms = async (req, res, next) => {
   try {
     const room = await Room.findById(req.params.id)
 
     res.status(200).json({
-      status: 'success',
-      results: room.length,
+      status: "sucess",
       data: {
         room
       }
     })
-  } catch (e) {
-    res.status(400).json(
-      {
-        status: `failed: ${e}`
-      }
-    )
-  } 
+  }
+  catch (e) {
+    res.status(400).json({
+      stats: "failed to get a room",
+    });
+  }
 }
 
-exports.createRoom = async (req, res, next) => {
+exports.CreateRoom = async (req, res, next) => {
   try {
     const room = await Room.create(req.body)
 
     res.status(200).json({
-      status: 'success',
-      results: room.length,
+      status: "sucess",
       data: {
         room
       }
     })
-  } catch (e) {
-    res.status(400).json(
-      {
-        status: `failed to get rooms. ${rooms}`
-      }
-    )
-  } 
+  }
+  catch (e) {
+    res.status(400).json({
+      stats: "failed to create rooms",
+    });
+  }
 }
 
-exports.updateRoom = async (req, res, next) => {
+exports.UpdateRoom = async (req, res, next) => {
   try {
     const room = await Room.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-      runValidators: true,
+      runValidators: true
     })
 
     res.status(200).json({
-      status: 'success',
-      results: room.length,
+      status: "sucess",
       data: {
         room
       }
     })
-  } catch (e) {
-    res.status(400).json(
-      {
-        status: "fail"
-      }
-    )
-  } 
+  }
+  catch (e) {
+    res.status(400).json({
+      stats: "failed to update a room",
+    });
+  }
 }
 
-exports.deleteRoom = async (req, res, next) => {
+exports.DeleteRoom = async (req, res, next) => {
   try {
     const room = await Room.findByIdAndDelete(req.params.id)
 
     res.status(200).json({
-      status: 'success',
+      status: "sucess",
     })
-  } catch (e) {
-    res.status(400).json(
-      {
-        status: "fail"
-      }
-    )
-  } 
+  }
+  catch (e) {
+    res.status(400).json({
+      stats: "failed to delete a room",
+    });
+  }
 }
-

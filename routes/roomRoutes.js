@@ -1,18 +1,11 @@
-const express = require("express")
+const express = require("express");
 
-const roomController = require("../controllers/roomController")
+const roomController = require("../controllers/roomController");
 
-const router = express.Router()
+const router = express.Router();
 
-router
-  .route("/")
-  .get(roomController.getAllRooms)
-  .post(roomController.createRoom)
+router.route("/").get(roomController.GetAllRooms).post(roomController.CreateRoom)
 
-router
-  .route("/:id")
-  .get(roomController.getOneRoom)
-  .patch(roomController.updateRoom)
-  .delete(roomController.deleteRoom)
+router.route("/:id").get(roomController.GetOneRooms).patch(roomController.UpdateRoom).delete(roomController.DeleteRoom)
 
 module.exports = router;
