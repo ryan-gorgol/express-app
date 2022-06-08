@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const { MONGO_USER, MONGO_PASSWORD, MONGO_IP, MONGO_PORT } = require("./config/config")
 
 const roomRouter = require("./routes/roomRoutes")
+const userRouter = require("./routes/userRoutes")
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.use('/api/v1/rooms', roomRouter);
+app.use('/api/v1/users', userRouter);
 
 const port = process.env.PORT || 3000
 
