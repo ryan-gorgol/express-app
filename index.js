@@ -31,6 +31,13 @@ app.get("/", (req, res) => {
   res.send("<h2>Hi there!!</h2>")
 });
 
+app.get("/test", (req, res) => {
+  res.send({
+    "greeting": "hello there",
+    "ok": "ok"
+  })
+})
+
 
 
 const port = process.env.PORT || 3000
