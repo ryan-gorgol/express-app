@@ -18,7 +18,7 @@ exports.GetAllRooms = async (req, res, next) => {
   }
 }
 
-exports.GetOneRooms = async (req, res, next) => {
+exports.GetOneRoom = async (req, res, next) => {
   try {
     const room = await Room.findById(req.params.id)
 
@@ -80,7 +80,7 @@ exports.DeleteRoom = async (req, res, next) => {
     const room = await Room.findByIdAndDelete(req.params.id)
 
     res.status(200).json({
-      status: "sucess",
+      status: "sucess"
     })
   }
   catch (e) {

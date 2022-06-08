@@ -20,11 +20,15 @@ const connectWithRetry = () => {
 
 connectWithRetry();
 
+app.use(express.json());
+
 // APP ROUTES
 app.get("/", (req, res, next) => {
   res.send("<h2>Hi there!!</h2>")
   next();
 });
+
+app.use('/api/v1/rooms', roomRouter);
 
 const port = process.env.PORT || 3000
 
