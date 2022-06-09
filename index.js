@@ -10,6 +10,7 @@ const app = express();
 // MONGO DB CONNECTION
 const mongoUrl = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
 
+// Connect to DB and log success
 const connectWithRetry = () => {
   mongoose.connect(mongoUrl)
     .then(() => console.log("successfully connected to DB"))
@@ -21,6 +22,7 @@ const connectWithRetry = () => {
 
 connectWithRetry();
 
+// json middleware
 app.use(express.json());
 
 // APP ROUTES

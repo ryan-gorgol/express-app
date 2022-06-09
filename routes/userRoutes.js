@@ -4,6 +4,6 @@ const authController = require("../controllers/authController")
 
 const router = express.Router();
 
-router.room("/signup", authController.signUp)
+router.route("/signup", authController.signUp)
 
 module.exports = router;
