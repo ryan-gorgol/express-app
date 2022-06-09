@@ -39,18 +39,17 @@ const connectWithRetry = () => {
 }
 connectWithRetry();
 
-
-app.use(session({
-  store: new RedisStore({ client: redisClient }),
-  secret: SESSION_SECRET,
-  cookie: {
-    secure: false,
-    resave: false,
-    saveUnitialized: false,
-    httpOnly: true,
-    maxAge: 30000
-  }
-}))
+// app.use(session({
+//   store: new RedisStore({ client: redisClient }),
+//   secret: SESSION_SECRET,
+//   cookie: {
+//     secure: false,
+//     resave: false,
+//     saveUnitialized: false,
+//     httpOnly: true,
+//     maxAge: 1296000000 //15 days
+//   }
+// }))
 
 // json middleware
 app.use(express.json());
