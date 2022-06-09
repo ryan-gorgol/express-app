@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const session = require("express-session")
 const redis = require("redis")
+
 let RedisStore = require("connect-redis")(session)
 
 const {
@@ -17,6 +18,7 @@ let redisClient = redis.createClient({
   host: REDIS_URL,
   port: REDIS_PORT,
 })
+
 
 const roomRouter = require("./routes/roomRoutes")
 const userRouter = require("./routes/userRoutes")
@@ -35,23 +37,21 @@ const connectWithRetry = () => {
       setTimeout(connectWithRetry, 5000)
     });
 }
-
 connectWithRetry();
 
 
 app.use(session({
-  store: new RedisStore({
-    client: redisClient,
-    secret: SESSION_SECRET,
-    cookie: {
-      secure: false,
-      resave: false,
-      saveUninitialized: false,
-      httpOnly: true,
-      maxAge: 30000
-    }
-  })
+  store: new RedisStore({ client: redisClient }),
+  secret: SESSION_SECRET,
+  cookie: {
+    secure: false,
+    resave: false,
+    saveUnitialized: false,
+    httpOnly: true,
+    maxAge: 30000
+  }
 }))
+
 // json middleware
 app.use(express.json());
 
