@@ -5,10 +5,10 @@ const roomController = require("../controllers/roomController");
 
 const router = express.Router();
 
-// router
-//   .route("/")
-//   .get(roomController.GetAllRooms)
-//   .post(roomController.CreateRoom)
+router
+  .route("/")
+  .get(roomController.GetAllRooms)
+  .post(roomController.CreateRoom)
 
 router
   .route("/:id")
