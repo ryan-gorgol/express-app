@@ -16,7 +16,4 @@ router
   .patch(roomController.UpdateRoom)
   .delete(roomController.DeleteRoom)
 
-router
-  .route("/:id/counter")
-
 module.exports = router;
