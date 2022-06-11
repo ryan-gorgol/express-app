@@ -5,7 +5,8 @@ exports.GetAllRooms = async (req, res, next) => {
     const rooms = await Room.find()
 
     res.status(200).json({
-      status: "success: get all rooms",
+
+      status: `success: get all rooms! Req.query.id:${req.query.id}`,
       data: {
         rooms
       }
@@ -13,26 +14,26 @@ exports.GetAllRooms = async (req, res, next) => {
   }
   catch (e) {
     res.status(400).json({
-      stats: "failed to get all rooms",
+      stats: `failed to get all rooms... Req.query.id:${req.query.id}`,
     });
   }
-  next();
 }
 
 exports.GetOneRoom = async (req, res, next) => {
   try {
-    const room = await Room.findOne({ _id: req.params._id })
+    const id = req.params.id
+    const room = await Room.findOneById(id)
 
     res.status(200).json({
       status: "success: got one room",
       data: {
         room
       }
-    })
+    }) 
   }
   catch (e) {
     res.status(400).json({
-      stats: "failed to get a specific room",
+      stats: `failed to get a specific room. Req.params.id: ${req.params.id} `,
     });
   }
 }
@@ -70,6 +71,7 @@ exports.UpdateRoom = async (req, res, next) => {
     })
   }
   catch (e) {
+    console.log(e, "error at UpdateRoom")
     res.status(400).json({
       stats: "failed to update a specific room",
     });
