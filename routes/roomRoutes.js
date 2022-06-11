@@ -1,7 +1,7 @@
 const express = require("express");
 
 const roomController = require("../controllers/roomController");
-const protect = require("../middleware/authMiddleware")
+// const protect = require("../middleware/authMiddleware")
 
 const router = express.Router();
 
@@ -15,5 +15,8 @@ router
   .get(roomController.GetOneRoom)
   .patch(roomController.UpdateRoom)
   .delete(roomController.DeleteRoom)
+
+router
+  .route("/:id/counter")
 
 module.exports = router;
