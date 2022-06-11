@@ -60,7 +60,7 @@ app.get("/", (req, res, next) => {
   next();
 });
 
-app.use('/api/v1/rooms/', roomRouter);
+app.use('/api/v1/rooms', roomRouter);
 // app.use('/api/v1/users', userRouter);
 
 const port = process.env.PORT || 3000
