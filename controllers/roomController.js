@@ -16,6 +16,7 @@ exports.GetAllRooms = async (req, res, next) => {
       stats: "failed to get all rooms",
     });
   }
+  next();
 }
 
 exports.GetOneRoom = async (req, res, next) => {
