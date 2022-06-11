@@ -21,7 +21,7 @@ exports.GetAllRooms = async (req, res, next) => {
 
 exports.GetOneRoom = async (req, res, next) => {
   try {
-    const room = await Room.findById(req.params._id).exec();
+    const room = await Room.findOne({ _id: req.params._id })
 
     res.status(200).json({
       status: "success: got one room",
