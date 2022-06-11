@@ -22,7 +22,7 @@ exports.GetAllRooms = async (req, res, next) => {
 exports.GetOneRoom = async (req, res, next) => {
   try {
     const id = req.params.id
-    const room = await Room.findOneById(id)
+    const room = await Room.findById(id)
 
     res.status(200).json({
       status: "success: got one room",
@@ -33,7 +33,7 @@ exports.GetOneRoom = async (req, res, next) => {
   }
   catch (e) {
     res.status(400).json({
-      stats: `failed to get a specific room. Req.params.id: ${req.params.id} `,
+      stats: `failed to get a specific room. Error: ${e}.Req.params.id: ${req.params.id} `,
     });
   }
 }
