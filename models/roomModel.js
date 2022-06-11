@@ -8,6 +8,10 @@ const roomSchema = new mongoose.Schema({
   body: {
     type: String,
     required: [true, "room must have a body"]
+  },
+  counter: {
+    type: Number,
+    required: [true, "room must have a count"]
   }
 })
 

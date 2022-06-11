@@ -51,7 +51,7 @@ exports.CreateRoom = async (req, res, next) => {
   }
   catch (e) {
     res.status(400).json({
-      stats: "failed to create room",
+      stats: `failed to create room. Err: ${e}`,
     });
   }
 }
