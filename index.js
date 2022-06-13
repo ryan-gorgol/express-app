@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const session = require("express-session")
 const redis = require("redis")
+const cors = require('cors');
 
 let RedisStore = require("connect-redis")(session)
 
@@ -50,8 +51,7 @@ connectWithRetry();
 //   }
 // }))
 
-var cors = require('cors');
-app.use(cors());
+// app.use(cors());
 
 // json middleware
 app.use(express.json());
