@@ -58,10 +58,10 @@ var corsOptions = {
   "optionsSuccessStatus": 204
 }
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 // json middleware
-app.use(express.json(corsOptions));
+app.use(express.json());
 
 
 
