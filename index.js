@@ -51,10 +51,17 @@ connectWithRetry();
 //   }
 // }))
 
+var corsOptions = {
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
+
 app.use(cors());
 
 // json middleware
-app.use(express.json());
+app.use(express.json(corsOptions));
 
 
 
