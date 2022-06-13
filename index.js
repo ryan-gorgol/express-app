@@ -51,7 +51,7 @@ connectWithRetry();
 //   }
 // }))
 
-// app.use(cors());
+app.use(cors());
 
 // json middleware
 app.use(express.json());
