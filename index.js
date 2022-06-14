@@ -55,7 +55,7 @@ const corsOptions = {
   "origin": '*',
   "methods": "GET,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
-  "optionsSuccessStatus": 200
+  "optionsSuccessStatus": 204
 }
 
 // json middleware
