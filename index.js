@@ -54,9 +54,15 @@ connectWithRetry();
 const corsOptions = {
   "origin": "*",
   "methods": "GET,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 204
+  "preflightContinue": true,
+  "optionsSuccessStatus": 200
 }
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "localhost:3000/"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // json middleware
 app.use(express.json());
