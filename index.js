@@ -54,7 +54,7 @@ connectWithRetry();
 const corsOptions = {
   "origin": '*',
   "methods": "GET,PUT,PATCH,POST,DELETE",
-  "preflightContinue": true,
+  "preflightContinue": false,
   "optionsSuccessStatus": 200
 }
 
