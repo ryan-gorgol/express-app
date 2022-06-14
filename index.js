@@ -53,7 +53,7 @@ connectWithRetry();
 
 var corsOptions = {
   "origin": "*",
-  "methods": "GET,PATCH,POST,DELETE",
+  "methods": "GET, PUT, PATCH, POST, DELETE",
   "optionsSuccessStatus": 200
 }
 
@@ -61,7 +61,6 @@ var corsOptions = {
 app.use(express.json());
 
 // CORS middleware
-app.options('*', cors())
 app.use(cors(corsOptions));
 
 // APP ROUTES
