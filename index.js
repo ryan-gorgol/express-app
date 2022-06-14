@@ -52,8 +52,9 @@ connectWithRetry();
 // }))
 
 const corsOptions = {
-  "origin": true,
-  "methods": "GET, PUT, PATCH, POST, DELETE",
+  "origin": '*',
+  "methods": "GET,PUT,PATCH,POST,DELETE",
+  "preflightContinue": true,
   "optionsSuccessStatus": 200
 }
 
