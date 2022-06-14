@@ -4,7 +4,7 @@ const session = require("express-session")
 const redis = require("redis")
 const cors = require('cors');
 
-let RedisStore = require("connect-redis")(session)
+// let RedisStore = require("connect-redis")(session)
 
 const {
   MONGO_USER,
@@ -15,10 +15,10 @@ const {
   REDIS_PORT,
   SESSION_SECRET } = require("./config/config")
 
-let redisClient = redis.createClient({
-  host: REDIS_URL,
-  port: REDIS_PORT,
-})
+// let redisClient = redis.createClient({
+//   host: REDIS_URL,
+//   port: REDIS_PORT,
+// })
 
 
 const roomRouter = require("./routes/roomRoutes")
@@ -51,23 +51,22 @@ connectWithRetry();
 //   }
 // }))
 
-const corsOptions = {
-  "origin": "*",
-  "methods": "GET,PUT,PATCH,POST,DELETE",
-  "preflightContinue": true,
-  "optionsSuccessStatus": 200
-}
+// const corsOptions = {
+//   "origin": "*",
+//   "methods": ['GET','PUT','PATCH','POST','DELETE'],
+//   "preflightContinue": true,
+//   "optionsSuccessStatus": 200
+// }
 
 // json middleware
 app.use(express.json());
 
 // CORS middleware
-app.use(cors(corsOptions));
+app.use(cors());
 
 // APP ROUTES
 app.get("/", (req, res, next) => {
   res.send("<h2>Hi there!!</h2>")
-  next();
 });
 
 app.use("/api/v1/rooms", roomRouter);
