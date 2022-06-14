@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors')
 
 const roomController = require("../controllers/roomController");
 // const protect = require("../middleware/authMiddleware")
@@ -12,6 +13,7 @@ router
 
 router
   .route("/:id")
+  .options('/score', cors())
   .get(roomController.GetOneRoom)
   .patch(roomController.UpdateRoom)
   .delete(roomController.DeleteRoom)
