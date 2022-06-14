@@ -63,6 +63,13 @@ app.use(express.json());
 // CORS middleware
 app.use(cors(corsOptions));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, PATCH");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // APP ROUTES
 app.get("/", (req, res, next) => {
   res.send("<h2>Hi there!!</h2>")
