@@ -52,7 +52,7 @@ connectWithRetry();
 // }))
 
 const corsOptions = {
-  "origin": "*",
+  "origin": true,
   "methods": "GET, PUT, PATCH, POST, DELETE",
   "optionsSuccessStatus": 200
 }
