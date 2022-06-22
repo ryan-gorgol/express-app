@@ -3,6 +3,8 @@ const mongoose = require("mongoose")
 const session = require("express-session")
 const redis = require("redis")
 const cors = require('cors');
+const https = require("https");
+const fs = require("fs");
 
 // let RedisStore = require("connect-redis")(session)
 
@@ -50,13 +52,6 @@ connectWithRetry();
 //     maxAge: 1296000000 //15 days
 //   }
 // }))
-
-// const corsOptions = {
-//   "origin": "*",
-//   "methods": ['GET','PUT','PATCH','POST','DELETE'],
-//   "preflightContinue": true,
-//   "optionsSuccessStatus": 200
-// }
 
 // json middleware
 app.use(express.json());
