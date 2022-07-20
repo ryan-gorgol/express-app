@@ -6,22 +6,20 @@ const cors = require('cors');
 const https = require("https");
 const fs = require("fs");
 
-// let RedisStore = require("connect-redis")(session)
+require('dotenv').config();
 
-const {
-  MONGO_USER,
-  MONGO_PASSWORD,
-  MONGO_IP,
-  MONGO_PORT,
-  REDIS_URL,
-  REDIS_PORT,
-  SESSION_SECRET } = require("./config/config")
+const PORT = process.env.PORT
+const MONGO_IP = process.env.MONGO_IP
+const MONGO_USER = process.env.MONGO_USER
+const MONGO_PORT = process.env.MONGO_PORT
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD
+
+// let RedisStore = require("connect-redis")(session)
 
 // let redisClient = redis.createClient({
 //   host: REDIS_URL,
 //   port: REDIS_PORT,
 // })
-
 
 const roomRouter = require("./routes/roomRoutes")
 const userRouter = require("./routes/userRoutes")
@@ -76,6 +74,4 @@ app.get("/", (req, res, next) => {
 app.use("/api/v1/rooms", roomRouter);
 // app.use('/api/v1/users', userRouter);
 
-const port = process.env.PORT
-
-app.listen(port, () => console.log(`listening on port ${port}`))
+app.listen(PORT, () => console.log(`listening on PORT ${PORT}`))
