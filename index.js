@@ -76,6 +76,6 @@ app.get("/", (req, res, next) => {
 app.use("/api/v1/rooms", roomRouter);
 // app.use('/api/v1/users', userRouter);
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 app.listen(port, () => console.log(`listening on port ${port}`))
