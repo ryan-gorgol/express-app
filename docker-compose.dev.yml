@@ -10,11 +10,11 @@ services:
       - /app/node_modules
     environment: 
       - PORT=3000
-      - MONGO_USER=mongoadmin
-      - MONG_PASSWORD=Password1
-      - SESSION_SECRET=secret
+      - MONGO_USER=${MONGO_USER}
+      - MONG_PASSWORD=${MONGO_PASSWORD}
+      - SESSION_SECRET=${SESSION_SECRET}
     command: npm run dev
   mongo: 
     environment: 
-      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
-      - MONGO_INITDB_ROOT_PASSWORD=Password1
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}

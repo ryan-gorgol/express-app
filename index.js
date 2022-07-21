@@ -3,23 +3,23 @@ const mongoose = require("mongoose")
 const session = require("express-session")
 const redis = require("redis")
 const cors = require('cors');
+const https = require("https");
+const fs = require("fs");
+
+require('dotenv').config();
+
+const PORT = process.env.PORT
+const MONGO_IP = process.env.MONGO_IP
+const MONGO_USER = process.env.MONGO_USER
+const MONGO_PORT = process.env.MONGO_PORT
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD
 
 // let RedisStore = require("connect-redis")(session)
-
-const {
-  MONGO_USER,
-  MONGO_PASSWORD,
-  MONGO_IP,
-  MONGO_PORT,
-  REDIS_URL,
-  REDIS_PORT,
-  SESSION_SECRET } = require("./config/config")
 
 // let redisClient = redis.createClient({
 //   host: REDIS_URL,
 //   port: REDIS_PORT,
 // })
-
 
 const roomRouter = require("./routes/roomRoutes")
 const userRouter = require("./routes/userRoutes")
@@ -29,12 +29,14 @@ const app = express();
 // MONGO DB CONNECTION
 const mongoUrl = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
 
+console.log(mongoUrl, 'MONGO COMPLETE URL')
+
 const connectWithRetry = () => {
   mongoose.connect(mongoUrl)
     .then(() => console.log("successfully connected to DB"))
     .catch((e) => {
       console.log(e); 
-      setTimeout(connectWithRetry, 5000)
+      setTimeout(connectWithRetry, 2500)
     });
 }
 connectWithRetry();
@@ -51,14 +53,6 @@ connectWithRetry();
 //   }
 // }))
 
-// const corsOptions = {
-//   "origin": "*",
-//   "methods": ['GET','PUT','PATCH','POST','DELETE'],
-//   "preflightContinue": true,
-//   "optionsSuccessStatus": 200
-// }
-
-
 // json middleware
 app.use(express.json());
 
@@ -67,6 +61,7 @@ app.use(cors());
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -81,6 +76,4 @@ app.get("/", (req, res, next) => {
 app.use("/api/v1/rooms", roomRouter);
 // app.use('/api/v1/users', userRouter);
 
-const port = process.env.PORT || 3000
-
-app.listen(port, () => console.log(`listening on port ${port}`))
+app.listen(PORT, () => console.log(`listening on PORT ${PORT}`))

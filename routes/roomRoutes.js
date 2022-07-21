@@ -13,7 +13,6 @@ router
 
 router
   .route("/:id")
-  .options(cors())
   .get(roomController.GetOneRoom)
   .patch(roomController.UpdateRoom)
   .delete(roomController.DeleteRoom)
