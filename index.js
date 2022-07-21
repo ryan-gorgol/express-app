@@ -4,6 +4,9 @@ const session = require("express-session")
 const redis = require("redis")
 const cors = require('cors');
 
+require('dotenv').config()
+// console.log(process.env, "PROCESS.ENV")
+
 // let RedisStore = require("connect-redis")(session)
 
 const {
