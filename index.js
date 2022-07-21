@@ -20,7 +20,6 @@ const {
 //   port: REDIS_PORT,
 // })
 
-
 const roomRouter = require("./routes/roomRoutes")
 const userRouter = require("./routes/userRoutes")
 
