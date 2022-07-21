@@ -14,6 +14,9 @@ const MONGO_USER = process.env.MONGO_USER
 const MONGO_PORT = process.env.MONGO_PORT
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD
 
+require('dotenv').config()
+// console.log(process.env, "PROCESS.ENV")
+
 // let RedisStore = require("connect-redis")(session)
 
 // let redisClient = redis.createClient({
