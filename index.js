@@ -73,7 +73,7 @@ app.use(function (req, res, next) {
 
 // APP ROUTES
 app.get("/", (req, res, next) => {
-  res.send("<h2>Hi there!!</h2>")
+  res.send("<h2>Hi there!!!</h2>")
 });
 
 app.use("/api/v1/rooms", roomRouter);
