@@ -1,9 +1,11 @@
 const User = require("../models/userModel")
 
 const bcrypt = require("bcryptjs")
+// const uuid = require('uuid');
 
 exports.signUp = async (req, res) => {
   const { username, password } = req.body
+  // const newUserId = uuid.v4()
   
   try {
     const hashpassword = await bcrypt.hash(password, 12)
@@ -11,7 +13,7 @@ exports.signUp = async (req, res) => {
       username,
       password: hashpassword
     })
-    req.session.user = newUser
+    // req.session.user = newUser
     res.status(201).json({
       status: 'success',
       data: {
@@ -20,7 +22,7 @@ exports.signUp = async (req, res) => {
     });
   } catch (e) {
     res.status(400).json({
-      status: "Failed"
+      status: `failed. Must have a unique username <--> ${e}}`
     })
   }
 }
@@ -29,7 +31,7 @@ exports.login = async (req, res) => {
   const {username, password} = req.body
   
   try {
-    const user = await User.findOneAndDelete({ username })
+    const user = await User.findOne({ username })
     
     if (!user) {
       return res.status(404).json({
@@ -38,12 +40,10 @@ exports.login = async (req, res) => {
       })
     }
 
-    
-
     const isCorrect = await bcrypt.compare(password, user.password)
 
     if (isCorrect) {
-      req.session.user = user
+      // req.session.user = user
       res.status(200).json({
         status: 'success'
       })
@@ -57,5 +57,23 @@ exports.login = async (req, res) => {
     res.status(400).json({
       status: "Failed"
     })
+  }
+}
+
+exports.listUsers = async (req, res) => {
+  try {
+    const users = await User.find()
+
+    res.status(200).json({
+
+      status: `success: get all rooms! Req.query.id:${req.query.id}`,
+      data: {
+        users
+      }
+    })
+  } catch (e) {
+    res.status(400).json({
+      stats: `failed to get all users... Req.query.id:${req.query.id}`,
+    });
   }
 }
