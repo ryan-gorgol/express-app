@@ -1,16 +1,17 @@
 const User = require("../models/userModel")
 
 const bcrypt = require("bcryptjs")
-// const uuid = require('uuid');
+const uuid = require('uuid');
 
 exports.signUp = async (req, res) => {
   const { username, password } = req.body
-  // const newUserId = uuid.v4()
+  const newUserId = uuid.v4()
   
   try {
     const hashpassword = await bcrypt.hash(password, 12)
     const newUser = await User.create({
       username,
+      userId: newUserId,
       password: hashpassword
     })
     // req.session.user = newUser
@@ -36,7 +37,7 @@ exports.login = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         status: 'failed',
-        message: 'user not found'
+        message: `user: ${username} was not found.`
       })
     }
 
@@ -50,7 +51,7 @@ exports.login = async (req, res) => {
     } else {
       res.status(400).json({
         status: 'failed',
-        message: 'incorrect username or password'
+        message: `incorrect userId: ${userId} or user-password: ${user.password} <> password: ${password}}}`
       })
     }
   } catch (e) {
@@ -60,20 +61,21 @@ exports.login = async (req, res) => {
   }
 }
 
+// this endpoint should be turned off before production mode is utilized. Purely for utility purposes. 
 exports.listUsers = async (req, res) => {
   try {
     const users = await User.find()
 
     res.status(200).json({
 
-      status: `success: get all rooms! Req.query.id:${req.query.id}`,
+      status: `success: returned all the users!`,
       data: {
         users
       }
     })
   } catch (e) {
     res.status(400).json({
-      stats: `failed to get all users... Req.query.id:${req.query.id}`,
+      stats: `failed to get all users.`,
     });
   }
 }
