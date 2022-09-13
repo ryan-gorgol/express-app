@@ -12,15 +12,18 @@ const MONGO_IP = process.env.MONGO_IP
 const MONGO_USER = process.env.MONGO_USER
 const MONGO_PORT = process.env.MONGO_PORT
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD
+const REDIS_URL = process.env.REDIS_URL
+const REDIS_PORT = process.env.REDIS_PORT
+const SESSION_SECRET = process.env.SESSION_SECRET
 
 require('dotenv').config()
 
-// let RedisStore = require("connect-redis")(session)
+let RedisStore = require("connect-redis")(session)
 
-// let redisClient = redis.createClient({
-//   host: REDIS_URL,
-//   port: REDIS_PORT,
-// })
+let redisClient = redis.createClient({
+  host: REDIS_URL,
+  port: REDIS_PORT,
+})
 
 const roomRouter = require("./routes/roomRoutes")
 const userRouter = require("./routes/userRoutes")
@@ -40,32 +43,23 @@ const connectWithRetry = () => {
 }
 connectWithRetry();
 
-// app.use(session({
-//   store: new RedisStore({ client: redisClient }),
-//   secret: SESSION_SECRET,
-//   cookie: {
-//     secure: false,
-//     resave: false,
-//     saveUnitialized: false,
-//     httpOnly: true,
-//     maxAge: 1296000000 //15 days
-//   }
-// }))
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: SESSION_SECRET,
+  cookie: {
+    secure: false,
+    resave: false,
+    saveUnitialized: false,
+    httpOnly: true,
+    maxAge: 1296000000 //15 days
+  }
+}))
 
 // json middleware
 app.use(express.json());
 
 // CORS middleware
 app.use(cors());
-
-// app.use(function (req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
-//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-//   res.setHeader('Access-Control-Allow-Credentials', true);
-//   next();
-//   });
 
 // APP ROUTES
 app.get("/", (req, res, next) => {

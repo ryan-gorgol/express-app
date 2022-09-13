@@ -5,7 +5,7 @@ const roomSchema = new mongoose.Schema({
     type: String,
     require: [true, "room must have a title"]
   },
-  body: {
+  password: {
     type: String,
     required: [true, "room must have a body"]
   },
