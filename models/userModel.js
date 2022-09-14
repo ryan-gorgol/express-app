@@ -11,11 +11,8 @@ const userSchema = new mongoose.Schema({
     require: [true, "user must have a password"],
   },
   displayName: {
-    type: String,
-  }, 
-  roomAccess: [{
-    roomName: String
-  }]
+    type: String
+  }
 })
 
 const User = mongoose.model("User", userSchema)
