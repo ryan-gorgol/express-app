@@ -10,12 +10,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: [true, "user must have a password"],
   },
-  userId: {
-    type: String,
-  },
   displayName: {
     type: String,
-  }
+  }, 
+  roomAccess: [{
+    type: String, 
+  }]
 })
 
 const User = mongoose.model("User", userSchema)

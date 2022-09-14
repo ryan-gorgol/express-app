@@ -52,7 +52,7 @@ app.use(session({
     saveUnitialized: false,
     httpOnly: true,
     maxAge: 1296000000 //15 days
-  }
+   }
 }))
 
 // json middleware

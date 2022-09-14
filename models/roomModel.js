@@ -5,13 +5,16 @@ const roomSchema = new mongoose.Schema({
     type: String,
     require: [true, "room must have a title"]
   },
-  password: {
+  pin: {
     type: String,
-    required: [true, "room must have a body"]
+    required: [true, "room must have a pin number"]
   },
   counter: {
     type: Number,
     required: [true, "room must have a count"]
+  },
+  open: {
+    type: Boolean,
   }
 })
 
