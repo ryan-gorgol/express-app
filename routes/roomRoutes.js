@@ -8,13 +8,13 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(roomController.GetAllRooms)
+  .get(protect, roomController.GetAllRooms)
   .post(protect, roomController.CreateRoom)
 
 router
   .route("/:id")
-  .get(roomController.GetOneRoom)
-  .patch(roomController.UpdateRoom)
-  .delete(roomController.DeleteRoom)
+  .get(protect, roomController.GetOneRoom)
+  .patch(protect, roomController.UpdateRoom)
+  .delete(protect, roomController.DeleteRoom)
 
 module.exports = router;
