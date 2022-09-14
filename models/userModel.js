@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     type: String,
   }, 
   roomAccess: [{
-    type: String, 
+    roomName: String
   }]
 })
 
