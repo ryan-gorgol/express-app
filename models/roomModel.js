@@ -15,7 +15,10 @@ const roomSchema = new mongoose.Schema({
   },
   open: {
     type: Boolean,
-  }
+  }, 
+  userAccessList: [{
+    userId: String,
+  }]
 })
 
 

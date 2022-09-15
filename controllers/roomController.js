@@ -49,14 +49,15 @@ exports.GetOneRoom = async (req, res, next) => {
 }
 
 exports.CreateRoom = async (req, res, next) => {
-  const { pin, title } = req.body
+  const { pin, title, id } = req.body
   try {
     const hashPin = await bcrypt.hash(pin, 12)
     const room = await Room.create({
       title: title,
       pin: hashPin,
       counter: 0,
-      open: false
+      open: false,
+      userAccessList: [{ userId: id }]
     })
 
     res.status(200).json({

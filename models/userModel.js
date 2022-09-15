@@ -12,7 +12,12 @@ const userSchema = new mongoose.Schema({
   },
   displayName: {
     type: String
-  }
+  },
+  roomAccess: [{
+    userId: String,
+    pin: String,
+    admin: Boolean,
+  }]
 })
 
 const User = mongoose.model("User", userSchema)
