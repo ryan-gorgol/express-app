@@ -76,3 +76,23 @@ exports.listUsers = async (req, res) => {
     });
   }
 }
+
+exports.findOneUser = async (req, res) => {
+
+  const { _id } = req.session.user
+
+  try {
+    const user = await User.findById(_id)
+
+    return res.status(200).json({
+      status: `found user ${_id}}`
+    })
+
+  } catch (e) {
+    return res.status(400).json({
+      status: `failed to find a session. please login`,
+    });
+  }
+}
+
+

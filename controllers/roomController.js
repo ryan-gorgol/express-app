@@ -21,7 +21,7 @@ exports.GetAllRooms = async (req, res, next) => {
   }
 }
 
-exports.GetOneRoom = async (req, res, next) => {
+exports.GetOneRoom = async (req, res) => {
   const { pin } = req.body
   const { id } = req.params
 
@@ -48,7 +48,7 @@ exports.GetOneRoom = async (req, res, next) => {
   }
 }
 
-exports.CreateRoom = async (req, res, next) => {
+exports.CreateRoom = async (req, res) => {
   const { pin, title, id } = req.body
   try {
     const hashPin = await bcrypt.hash(pin, 12)
@@ -74,7 +74,7 @@ exports.CreateRoom = async (req, res, next) => {
   }
 }
 
-exports.UpdateRoom = async (req, res, next) => {
+exports.UpdateRoom = async (req, res) => {
   try {
     const room = await Room.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -96,7 +96,7 @@ exports.UpdateRoom = async (req, res, next) => {
   }
 }
 
-exports.DeleteRoom = async (req, res, next) => {
+exports.DeleteRoom = async (req, res) => {
   try {
     const room = await Room.findByIdAndDelete(req.params.id)
 
@@ -111,7 +111,7 @@ exports.DeleteRoom = async (req, res, next) => {
   }
 }
 
-exports.ChangeCounter = async (req, res, next) => {
+exports.ChangeCounter = async (req, res) => {
   try {
     const room = await Room.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
