@@ -1,11 +1,10 @@
 const protect = (req, res, next) => {
-  const { user } = req.session
+  const { auth } = req.cookies
+  console.log(auth, "<<USER>>")
   
-  if (!user) {
+  if (auth !== 'true') {
     return res.status(401).json({status: 'fail', message: 'unauthorized'})
   }
-
-  req.user = user
 
   next()
 }

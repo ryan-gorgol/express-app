@@ -27,7 +27,8 @@ exports.signUp = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { username, password } = req.body
-  
+
+  console.log(req.cookies, "<<REQ.COOKIES>>")
   try {
     const user = await User.findOne({ username })
     
@@ -45,12 +46,7 @@ exports.login = async (req, res) => {
       res.status(200).json({
         status: 'success'
       })
-    } else {
-      res.status(400).json({
-        status: 'failed',
-        message: `incorrect userId: ${userId} or user-password: ${user.password} <> password: ${password}}}`
-      })
-    }
+    } 
   } catch (e) {
     res.status(400).json({
       status: "Failed"
@@ -78,21 +74,25 @@ exports.listUsers = async (req, res) => {
 }
 
 exports.findOneUser = async (req, res) => {
+  const user = req?.session?.user
+  const id = user?._id
+    try {
+      const currentUser = await User.findById(id)
 
-  const { _id } = req.session.user
+      if (!user) {
+        res.status(400).json({
+          status: "No user found"
+        })
+      } else {
+        res.status(200).json({
+          status: `found user ${currentUser.username}}`
+        })
+      }
+    } catch (e) {
 
-  try {
-    const user = await User.findById(_id)
+      return res.status(400).json({
+        status: `failed to find a user. please login ${user} user <> ${id}`,
+      });
 
-    return res.status(200).json({
-      status: `found user ${_id}}`
-    })
-
-  } catch (e) {
-    return res.status(400).json({
-      status: `failed to find a session. please login`,
-    });
+    }
   }
-}
-
-
