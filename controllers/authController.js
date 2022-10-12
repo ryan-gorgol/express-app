@@ -27,8 +27,6 @@ exports.signUp = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { username, password } = req.body
-
-  console.log(req.cookies, "<<REQ.COOKIES>>")
   try {
     const user = await User.findOne({ username })
     
@@ -95,4 +93,6 @@ exports.findOneUser = async (req, res) => {
       });
 
     }
-  }
+}
+  
+// LOGOUT!!!!
